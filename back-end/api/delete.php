@@ -13,9 +13,7 @@
     
     $item = new Entrega($db);
     
-    $data = filter_input_array(INPUT_POST);
-    
-    $item->id = $data['id'];
+    $item->id = isset($_GET['id']) ? (int)$_GET['id'] : die();
     
     if($item->deleteEntrega()){
         echo json_encode("Entrega removida.");
