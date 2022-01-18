@@ -37,8 +37,8 @@
                         status = :status, 
                         ponto_coleta = :ponto_coleta, 
                         ponto_destino = :ponto_destino, 
-                        cliente_id = :cliente_id, 
-                        entregador_id = :entregador_id, 
+                        cliente_id = :cliente_id,
+                        entregador_id = :entregador_id,
                         created_at = :created_at";
         
             $stmt = $this->conn->prepare($sqlQuery);
@@ -56,9 +56,9 @@
             $stmt->bindParam(":ponto_coleta", $this->ponto_coleta);
             $stmt->bindParam(":ponto_destino", $this->ponto_destino);
             $stmt->bindParam(":cliente_id", $this->cliente_id);
-            $stmt->bindParam(":entregador_id", $this->entregador_id);
+            $stmt->bindValue(':entregador_id', $this->entregador_id = null, PDO::PARAM_INT);
             $stmt->bindParam(":created_at", $this->created_at);
-        
+
             if($stmt->execute()){
                return true;
             }
@@ -84,6 +84,7 @@
             $stmt = $this->conn->prepare($sqlQuery);
 
             $stmt->bindParam(1, $this->id);
+            // $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
 
             $stmt->execute();
 
@@ -115,7 +116,7 @@
         
             $this->status=htmlspecialchars(strip_tags($this->status));
             $this->ponto_coleta=htmlspecialchars(strip_tags($this->ponto_coleta));
-            $this->ponto_destino=htmlspecialchars(strip_tags($this->age));
+            $this->ponto_destino=htmlspecialchars(strip_tags($this->ponto_destino));
             $this->cliente_id=htmlspecialchars(strip_tags($this->cliente_id));
             $this->entregador_id=htmlspecialchars(strip_tags($this->entregador_id));
             $this->created_at=htmlspecialchars(strip_tags($this->created_at));
